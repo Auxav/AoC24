@@ -1,17 +1,15 @@
 defmodule Aoc24.Day01 do
-  alias Aoc24.Parser
 
-  def puzzle1(infile) when is_bitstring(infile), do: Parser.parse_lists(infile) |> puzzle1()
-  def puzzle1({ll, lr}) do
+  def puzzle1(infile \\ "./lib/inputs/day01_1_input") do
+    {ll, lr} = parse_lists(infile)
+
     Enum.zip(Enum.sort(ll), Enum.sort(lr))
     |> Enum.reduce(0, fn {x, y}, acc -> abs(x - y) + acc end)
   end
 
-  def solve_puzzle1(), do: puzzle1("./lib/inputs/day01_1_input")
 
-
-  def puzzle2(infile) when is_bitstring(infile), do: Parser.parse_lists(infile) |> puzzle2()
-  def puzzle2({ll, lr}) do
+  def puzzle2(infile \\ "./lib/inputs/day01_1_input") do
+    {ll, lr} = parse_lists(infile)
     freqs = Enum.frequencies(lr)
 
     Enum.reduce(ll, 0, fn x, acc ->
@@ -22,6 +20,15 @@ defmodule Aoc24.Day01 do
     end)
   end
 
-  def solve_puzzle2(), do: puzzle2("./lib/inputs/day01_1_input")
+
+  defp parse_lists(input_file) do
+      {:ok, fs} = File.read(input_file)
+
+      fs
+      |> String.split("\n")
+      |> Enum.map(&String.split(&1))
+      |> Enum.map(fn [a, b] -> {String.to_integer(a), String.to_integer(b)} end)
+      |> Enum.unzip()
+  end
 
 end
