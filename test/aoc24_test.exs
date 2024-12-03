@@ -12,4 +12,8 @@ defmodule Aoc24Test do
   test "Day02.puzzle1" do
     assert Aoc24.Day02.puzzle1("./test/inputs/day02_1_input") == 2
   end
+
+  test "Day03.puzzle1" do
+    assert Aoc24.Day03.puzzle1("./test/inputs/day03_1_input") == 161
+  end
 end
