@@ -3,10 +3,7 @@ defmodule Aoc24.Day03 do
   def puzzle1(infile \\ "./lib/inputs/day03_1_input") do
     {:ok, fs} = File.read(infile)
 
-    fs
-    |> String.split("\n")
-    |> Enum.map(&(&1 |> find_muls |> sum_muls))
-    |> Enum.sum()
+    fs |> find_muls |> sum_muls
   end
 
   def find_muls(s), do: Regex.scan(~r/mul\((\d+),(\d+)\)/, s)
